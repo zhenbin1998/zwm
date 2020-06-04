@@ -2,20 +2,20 @@
 #define EVENTMANAGER_HPP
 
 #include "include.hpp"
-
+class EventManager;
 struct OnEvents
 {
     int eventType;
     std::string eventName;
-    void (*event)(XEvent *e);
+    void (*event)(EventManager *_eventsmanager);
 };
-
-typedef struct XArg{
-    const char** com;
+struct XArg
+{
+    const char **com;
     const int i;
     const Window w;
-} ;
-typedef struct XKey
+};
+struct XKey
 {
     uint mod;
     KeySym keysym;
@@ -25,15 +25,16 @@ typedef struct XKey
 
 class EventManager
 {
+
 private:
     //typedef void(*eventsFunPtr[LASTEvent])(XEvent * _event) = {nullptr};
-    static Display *display;
+    Display *display;
     XEvent event;
     OnEvents onEvent[LASTEvent + 1] = {
         {0, "", nullptr},
         {1, "", nullptr},
         //Keyboard events
-        {2, "KeyPress", keyPress}, 
+        {2, "KeyPress", keyPress},
         {3, "KeyRelease", nullptr},
         //Pointer events
         {4, "ButtonPress", buttonPress},
@@ -51,7 +52,7 @@ private:
         {12, "Expose", nullptr},
         {13, "GraphicsExpose", nullptr},
         {14, "NoExpose", nullptr},
-//Structure control events and Window state notification events
+        //Structure control events and Window state notification events
         {15, "VisibilityNotify", nullptr},
         {16, "CreateNotify", nullptr},
         {17, "DestroyNotify", destroyNotify},
@@ -73,7 +74,7 @@ private:
         {32, "ColormapNotify", nullptr},
         //Client communication events
         {33, "ClientMessage", nullptr},
-        
+
         {34, "MappingNotify", nullptr},
         {35, "GenericEvent", nullptr},
         {36, "LASTEvent", nullptr}};
@@ -82,17 +83,16 @@ public:
     EventManager(Display *_display);
     ~EventManager();
     void Run();
-    
-    static void buttonPress(XEvent *_event);
-    static void buttonRelease(XEvent *_event);
-    static void motionNotify(XEvent *_event);
 
-    static void configureRequest(XEvent *_event);
-    static void keyPress(XEvent *_event);
-    static void mapRequest(XEvent *_event);
-    static void destroyNotify(XEvent *_event);
-    static void enterNotify(XEvent *_event);
-    
+    static void buttonPress(EventManager *_eventsmanager);
+    static void buttonRelease(EventManager *_eventsmanager);
+    static void motionNotify(EventManager *_eventsmanager);
+
+    static void configureRequest(EventManager *_eventsmanager);
+    static void keyPress(EventManager *_eventsmanager);
+    static void mapRequest(EventManager *_eventsmanager);
+    static void destroyNotify(EventManager *_eventsmanager);
+    static void enterNotify(EventManager *_eventsmanager);
 };
 
 #endif //EVENTMANAGER_HPP

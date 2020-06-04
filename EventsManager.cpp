@@ -16,48 +16,48 @@ void EventManager::Run()
         if (onEvent[event.type].event)
         {
             std::cout << onEvent[event.type].eventName << std::endl;
-            onEvent[event.type].event(&event);
+            onEvent[event.type].event(this);
         }
 }
 
-void EventManager::buttonPress(XEvent* _event)
+void EventManager::buttonPress(EventManager *_eventsmanager)
 {
     std::cout << "buttonPress" << std::endl;
 }
 
-void EventManager::buttonRelease(XEvent* _event)
+void EventManager::buttonRelease(EventManager *_eventsmanager)
 {
 
 }
 
-void EventManager::configureRequest(XEvent* _event)
+void EventManager::configureRequest(EventManager *_eventsmanager)
 {
 
 }
 
-void EventManager::motionNotify(XEvent* _event)
+void EventManager::motionNotify(EventManager *_eventsmanager)
 {
 
 }
 
-void EventManager::keyPress(XEvent* _event)
+void EventManager::keyPress(EventManager *_eventsmanager)
 {
     std::cout << "buttonPress" << std::endl;
-    KeySym keysym = XkbKeycodeToKeysym(display, _event->xkey.keycode, 0, 0);
+    KeySym keysym = XkbKeycodeToKeysym(_eventsmanager->display,_eventsmanager->event.xkey.keycode, 0, 0);
     std::cout << keysym << std::endl;
 }
 
-void EventManager::mapRequest(XEvent* _event)
+void EventManager::mapRequest(EventManager *_eventsmanager)
 {
 
 }
 
-void EventManager::destroyNotify(XEvent*  _event)
+void EventManager::destroyNotify(EventManager *_eventsmanager)
 {
 
 }
 
-void EventManager::enterNotify(XEvent* _event)
+void EventManager::enterNotify(EventManager *_eventsmanager)
 {
 
 }

@@ -2,8 +2,8 @@
 
 WindowManager::WindowManager(Display* _display)
                                 :display(_display),
-                                screen(DefaultScreenOfDisplay(_display)),
                                 rootWindow(DefaultRootWindow(_display)),
+                                screen(DefaultScreenOfDisplay(_display)),
                                 displayHeight(screen->height),
                                 displayWidth(screen->width)
 {

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 # 1. Build binary.
+make clean
 make zwm
 
 # 2. Run.
